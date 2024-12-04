@@ -79,5 +79,5 @@ model.fit(training_datas, training_classes, epochs=e, batch_size=batchsize)
 
 print("testing time!")
 
-accuracy = model.evaluate(testing_datas, testing_classes)
-print(accuracy)
+output = model.evaluate(testing_datas, testing_classes)
+print(output)
