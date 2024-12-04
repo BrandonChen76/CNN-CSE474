@@ -56,15 +56,15 @@ testing_classes = load_idx1_to_np('t10k-labels.idx1-ubyte')
 #model set up-------------------------------------------------------------------------------------------------------------
 
 #batch size and epoch
-batchsize = 32
-e = 10
+batchsize = 128
+e = 100
 
 #exactly as stated in document: conv -> pooling -> conv -> pooling -> 1d flatten -> 100 neurons -> 100 neurons -> 10 output
 model = tf.keras.Sequential([
-    tf.keras.layers.Conv2D(filters=32, kernel_size=(3, 3), activation='relu', strides=(1, 1), padding='valid'),
-    tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
-    tf.keras.layers.Conv2D(filters=32, kernel_size=(3, 3), activation='relu', strides=(1, 1), padding='valid'),
-    tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
+    tf.keras.layers.Conv2D(filters=32, kernel_size=(3,3), activation='relu', strides=(1,1), padding='valid'),
+    tf.keras.layers.MaxPooling2D(pool_size=(2,2), strides=(2,2)),
+    tf.keras.layers.Conv2D(filters=32, kernel_size=(3, 3), activation='relu', strides=(1,1), padding='valid'),
+    tf.keras.layers.MaxPooling2D(pool_size=(2,2), strides=(2,2)),
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(units=100, activation='sigmoid'),
     tf.keras.layers.Dense(units=100, activation='sigmoid'),
@@ -79,5 +79,5 @@ model.fit(training_datas, training_classes, epochs=e, batch_size=batchsize)
 
 print("testing time!")
 
-loss, accuracy = model.evaluate(testing_datas, testing_classes)
+accuracy = model.evaluate(testing_datas, testing_classes)
 print(accuracy)
